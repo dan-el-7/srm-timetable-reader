@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SRM Timetable Companion</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div class="brand-mark">SRM</div>
+      <div>
+        <p class="kicker">Student portal utility</p>
+        <h1>Timetable companion</h1>
+        <p class="subtitle">Date-aware day orders, classes and locations.</p>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">1 · Calendar memory</p>
+          <h2>Academic calendar</h2>
+        </div>
+        <span id="cacheBadge" class="badge muted">Not cached</span>
+      </div>
+      <p id="cacheSummary" class="muted-text">Open Academic Calendar/Planner on the SRMIST portal and read it once. It will stay in this browser.</p>
+      <label class="toggle-row"><input id="resetBeforeRead" type="checkbox"><span>Reset cache on the next read</span></label>
+      <button id="resetCache" class="text-button" type="button">Reset cached calendar now</button>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">2 · Resolve the date</p>
+          <h2>Which schedule?</h2>
+        </div>
+      </div>
+      <label class="field-label" for="targetDate">Schedule date</label>
+      <input id="targetDate" class="input" type="date">
+      <label class="field-label" for="dayOrderMode">Week and day-order source</label>
+      <select id="dayOrderMode" class="input">
+        <option value="date">Automatic: Sunday–Friday current week; Saturday → next week</option>
+        <option value="current-week">Force this week</option>
+        <option value="next-week">Force next week</option>
+        <option value="manual">Manual override</option>
+      </select>
+      <p class="helper-text">The preview and export contain the full Sunday–Friday calendar week, not just the selected day.</p>
+      <div id="manualOrderWrap" class="hidden">
+        <label class="field-label" for="manualOrder">Manual day order</label>
+        <select id="manualOrder" class="input">
+          <option value="Day 1">Day 1</option><option value="Day 2">Day 2</option><option value="Day 3">Day 3</option>
+          <option value="Day 4">Day 4</option><option value="Day 5">Day 5</option><option value="Day 6">Day 6</option>
+        </select>
+      </div>
+      <button id="readPortal" class="primary-button" type="button">Read this portal page</button>
+      <p id="status" class="status" role="status"></p>
+    </section>
+
+    <section id="resolutionCard" class="card result-card hidden">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Resolved schedule</p>
+          <h2 id="resolutionTitle">—</h2>
+        </div>
+        <span id="resolutionBadge" class="badge">—</span>
+      </div>
+      <p id="resolutionText" class="muted-text"></p>
+      <div id="schedulePreview" class="schedule-preview"></div>
+      <button id="exportButton" class="secondary-button" type="button" disabled>Export pretty HTML</button>
+    </section>
+
+    <footer>Only portal page content is read. Calendar data is stored locally in Chrome.</footer>
+  </main>
+  <script src="shared.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

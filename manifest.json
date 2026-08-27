@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "SRM Timetable Companion",
+  "version": "0.21.0",
+  "description": "Turns the SRMIST student portal timetable into a dated, location-aware schedule.",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["https://sp.srmist.edu.in/*"],
+  "action": {
+    "default_title": "SRM Timetable Companion",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://sp.srmist.edu.in/*"],
+      "js": ["shared.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
