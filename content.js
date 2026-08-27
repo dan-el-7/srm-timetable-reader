@@ -3,6 +3,62 @@
 
   const T = globalThis.SRMTimetable;
 
+  const PORTAL_THEME_STYLE_ID = "srm-timetable-companion-portal-theme";
+  const PORTAL_DARK_CSS = `
+html.srm-timetable-companion-dark{color-scheme:dark;background:#111315!important}
+html.srm-timetable-companion-dark body,html.srm-timetable-companion-dark #layoutSidenav,html.srm-timetable-companion-dark #layoutSidenav_content{background:#111315!important;color:#e6e8eb!important}
+html.srm-timetable-companion-dark .topnav,html.srm-timetable-companion-dark .navbar.bg-white,html.srm-timetable-companion-dark .navbar-light{background:#171a20!important;border-bottom:1px solid #2b3038!important;box-shadow:none!important}
+html.srm-timetable-companion-dark .navbar-brand,html.srm-timetable-companion-dark .topnav .text-custom{color:#e6e8eb!important}
+html.srm-timetable-companion-dark #layoutSidenav_nav,html.srm-timetable-companion-dark .sidenav,html.srm-timetable-companion-dark .sidenav-light{background:#171a20!important;color:#c4ccd6!important;border-color:#2b3038!important}
+html.srm-timetable-companion-dark .sidenav .nav-link,html.srm-timetable-companion-dark .sidenav .nav-link span{color:#aeb8c4!important}
+html.srm-timetable-companion-dark .sidenav .nav-link:hover,html.srm-timetable-companion-dark .sidenav .nav-link.active{color:#78b9ff!important;background:#202a36!important}
+html.srm-timetable-companion-dark .sidenav .nav-link-icon{color:#74869b!important}html.srm-timetable-companion-dark .sidenav .nav-link.active .nav-link-icon{color:#78b9ff!important}
+html.srm-timetable-companion-dark .sidenav-footer{background:#14171b!important;border-top:1px solid #2b3038!important;color:#9aa4b2!important}
+html.srm-timetable-companion-dark .card,html.srm-timetable-companion-dark .card-body,html.srm-timetable-companion-dark .modal-content{background:#171a20!important;color:#e6e8eb!important;border-color:#2b3038!important;box-shadow:none!important}
+html.srm-timetable-companion-dark .card-header.bg-custom,html.srm-timetable-companion-dark .bg-custom{background:#1e5b8e!important;color:#fff!important;border-color:#2d6b9d!important}
+html.srm-timetable-companion-dark .table-responsive,html.srm-timetable-companion-dark .table{color:#e6e8eb!important;border-color:#2b3038!important}
+html.srm-timetable-companion-dark .table th,html.srm-timetable-companion-dark .table td{color:#dce3eb!important;border-color:#2b3038!important}
+html.srm-timetable-companion-dark .table thead th,html.srm-timetable-companion-dark .table-primary th,html.srm-timetable-companion-dark .table-primary>td{background:#24344a!important;color:#f1f5f9!important}
+html.srm-timetable-companion-dark .table-striped tbody tr:nth-of-type(odd)>*,html.srm-timetable-companion-dark .table-striped tbody tr:nth-of-type(odd){background:#1c2026!important}
+html.srm-timetable-companion-dark .table-striped tbody tr:nth-of-type(even)>*,html.srm-timetable-companion-dark .table-striped tbody tr:nth-of-type(even){background:#171a20!important}
+html.srm-timetable-companion-dark #subjectTab table td,html.srm-timetable-companion-dark #slotTab table td{background:#1c2026!important;color:#dce3eb!important}
+html.srm-timetable-companion-dark #subjectTab table th,html.srm-timetable-companion-dark #slotTab table th{background:#24344a!important;color:#f1f5f9!important}
+html.srm-timetable-companion-dark input:not([type="checkbox"]):not([type="radio"]),html.srm-timetable-companion-dark select,html.srm-timetable-companion-dark textarea{background:#101317!important;color:#e6e8eb!important;border-color:#3a4654!important}
+html.srm-timetable-companion-dark input::placeholder,html.srm-timetable-companion-dark textarea::placeholder{color:#7f8b9a!important}
+html.srm-timetable-companion-dark .nav-tabs{border-bottom-color:#2b3038!important}html.srm-timetable-companion-dark .nav-tabs .nav-link{color:#9fb0c3!important}html.srm-timetable-companion-dark .nav-tabs .nav-link.active{background:#171a20!important;color:#78b9ff!important;border-color:#2b3038 #2b3038 #171a20!important}
+html.srm-timetable-companion-dark .dropdown-menu,html.srm-timetable-companion-dark .dropdown-item{background:#171a20!important;color:#dce3eb!important;border-color:#2b3038!important}html.srm-timetable-companion-dark .dropdown-item:hover{background:#202a36!important}
+html.srm-timetable-companion-dark .modal-header,html.srm-timetable-companion-dark .modal-footer{border-color:#2b3038!important}html.srm-timetable-companion-dark .close{color:#e6e8eb!important;text-shadow:none}
+html.srm-timetable-companion-dark .footer-light{background:#171a20!important;color:#9aa4b2!important;border-color:#2b3038!important}html.srm-timetable-companion-dark .text-muted{color:#9aa4b2!important}html.srm-timetable-companion-dark a{color:#78b9ff}
+html.srm-timetable-companion-dark .btn-transparent-dark{color:#c4ccd6!important;background:transparent!important}html.srm-timetable-companion-dark .btn-custom,html.srm-timetable-companion-dark .btn-primary{background:#1e5b8e!important;color:#fff!important;border-color:#2d6b9d!important}
+html.srm-timetable-companion-dark ::-webkit-scrollbar{width:12px;height:12px}html.srm-timetable-companion-dark ::-webkit-scrollbar-track{background:#111315}html.srm-timetable-companion-dark ::-webkit-scrollbar-thumb{background:#384555;border:3px solid #111315;border-radius:10px}
+`;
+
+  function applyPortalTheme(theme) {
+    const dark = theme !== "light";
+    const root = document.documentElement;
+    root.classList.toggle("srm-timetable-companion-dark", dark);
+    let style = document.getElementById(PORTAL_THEME_STYLE_ID);
+    if (dark) {
+      if (!style) {
+        style = document.createElement("style");
+        style.id = PORTAL_THEME_STYLE_ID;
+        (document.head || root).appendChild(style);
+      }
+      style.textContent = PORTAL_DARK_CSS;
+    } else if (style) {
+      style.remove();
+    }
+  }
+
+  function loadPortalTheme() {
+    chrome.storage.local.get("themePreference", (stored) => applyPortalTheme(stored && stored.themePreference || "dark"));
+  }
+
+  loadPortalTheme();
+  chrome.storage.onChanged.addListener((changes, areaName) => {
+    if (areaName === "local" && changes.themePreference) applyPortalTheme(changes.themePreference.newValue || "dark");
+  });
+
   function matrixForTable(table) {
     return Array.from(table.querySelectorAll("tr")).map((row) => {
       const cells = [];
