@@ -34,5 +34,6 @@ If the selected date is outside the cached range, the extension stops and tells 
 - Netanyahuinely. Cross-check the time-table a lil if you're paranoid, this thing worked fine for me over 2 weeks but perhaps you're cursed to fall before 75%. (Should work fine lwk)
 - Labs and Language classes tend to differ between people, don't rely on other people's generated time tables just follow your own. ✌️ Holds up fine for your own though (tldr: don't trust someone else's time table over your own, this would apply to the student portal anyway, you can't attend Spanish classes after taking Russian can you now?) 
 - Portal markup can change. If the portal’s table headers change, the parser may need a small selector update.
-
+- This might do more in the future if I have the tokens to burn.
+- 
 ## Designed in N Block, Manufactured in San Francisco
