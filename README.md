@@ -35,5 +35,5 @@ If the selected date is outside the cached range, the extension stops and tells 
 - Labs and Language classes tend to differ between people, don't rely on other people's generated time tables just follow your own. ✌️ Holds up fine for your own though (tldr: don't trust someone else's time table over your own, this would apply to the student portal anyway, you can't attend Spanish classes after taking Russian can you now?) 
 - Portal markup can change. If the portal’s table headers change, the parser may need a small selector update.
 - This might do more in the future if I have the tokens to burn.
-- 
+- Random holiday's might switch future day order's around, watch out for that and reset your calendar accordingly.
 ## Designed in N Block, Manufactured in San Francisco
