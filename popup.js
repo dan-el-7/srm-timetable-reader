@@ -36,6 +36,21 @@
     return chrome.runtime.getManifest().version;
   }
 
+  function normaliseTheme(value) {
+    return value === "light" ? "light" : "dark";
+  }
+
+  function currentTheme() {
+    return normaliseTheme(document.documentElement.dataset.theme || $("#themeMode").value);
+  }
+
+  function applyTheme(value) {
+    const theme = normaliseTheme(value);
+    document.documentElement.dataset.theme = theme;
+    if ($("#themeMode")) $("#themeMode").value = theme;
+    return theme;
+  }
+
   function setStatus(text, type) {
     const node = $("#status");
     node.textContent = text || "";
@@ -148,6 +163,7 @@
   }
 
   function showResult(payload) {
+    payload.theme = normaliseTheme(payload.theme || currentTheme());
     lastPayload = payload;
     const resolution = payload.resolution;
     const days = payload.days || [];
@@ -223,6 +239,7 @@
 
   function exportHtml() {
     if (!lastPayload || !lastPayload.resolution || !lastPayload.resolution.ok) return;
+    lastPayload.theme = currentTheme();
     const html = T.buildExportHtml(lastPayload);
     const url = URL.createObjectURL(new Blob([html], { type: "text/html;charset=utf-8" }));
     const link = document.createElement("a");
@@ -244,10 +261,16 @@
   document.addEventListener("DOMContentLoaded", async () => {
     $("#targetDate").value = localDateValue();
     $("#dayOrderMode").addEventListener("change", setModeVisibility);
+    $("#themeMode").addEventListener("change", async () => {
+      const theme = applyTheme($("#themeMode").value);
+      await storageSet({ themePreference: theme });
+    });
     $("#readPortal").addEventListener("click", readPortal);
     $("#exportButton").addEventListener("click", exportHtml);
     $("#resetCache").addEventListener("click", resetCache);
-    renderCache((await storageGet("calendarCache")).calendarCache || null);
+    const stored = await storageGet(["calendarCache", "themePreference"]);
+    applyTheme(stored.themePreference || "dark");
+    renderCache(stored.calendarCache || null);
     setModeVisibility();
   });
 })();
