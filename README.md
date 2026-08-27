@@ -2,8 +2,7 @@
 
 Apparently things for you couldn't be annoying enough for you as a first year so they decided they should kill off Academia, shift stuff to the Student Portal, while keeping it just as awful to read but ensuring any tools that existed wouldn't work :)
 <small>(A small Chrome Manifest V3 extension for the SRMIST student portal. It reads the visible Academic Calendar/Planner and Timetable pages, caches the calendar locally, resolves day order by the exact selected date, matches course codes to their locations, and exports a printable HTML timetable. So technically, you never need to enter your login info anywhere except SRM's portal)</small>
-<p align="center"><img src="/screenshots/finalexport.png" alt="Generated timetable" width="800"></p>
-<p align="center"><img src="/screenshots/extension.png" alt="SRM Timetable Companion extension" width="350"></p>
+<p align="center"><img src="/screenshots/extension.png" alt="SRM Timetable Companion extension" width="280">&nbsp;&nbsp;&nbsp;<strong style="font-size: 32px;">→</strong>&nbsp;&nbsp;&nbsp;<img src="/screenshots/finalexport.png" alt="Generated timetable" width="600"></p>
 <!-- white spaces to save storage, the comment to waste it -->
 
 ## Install
